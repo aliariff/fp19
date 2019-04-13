@@ -8,7 +8,7 @@ myrem x y | y < 0 = myrem x (-y)
 count :: Int -> [Int] -> Int
 count x [] = 0
 count x (y:ys) | x == y = 1 + count x ys
-                 | otherwise = count x ys
+               | otherwise = count x ys
 
 -- removeItem is helper function to remove all of a item occurences in a list
 removeItem :: Int -> [Int] -> [Int]
