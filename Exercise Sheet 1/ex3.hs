@@ -1,4 +1,4 @@
-module Ex3 where
+module S1Ex3 where
 
 -- | myrem x y is the remainder of the integer division when dividing x by y
 --
