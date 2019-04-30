@@ -64,5 +64,7 @@ value x (Push m n xs) | x == n    = m
 -- |
 -- >>> pop p
 -- (5,11|1 : 5|0 : 9|-1 : 7|3 : 8|-3 : [])
+-- >>> pop (Push 1 2 EmptyQueue)
+-- (1,[])
 pop :: PriorityQueue a -> (a, PriorityQueue a)
 pop pq = (value maxP pq, remove maxP pq) where maxP = maxPriority pq
