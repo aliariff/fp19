@@ -29,6 +29,8 @@ isWaiting x (Push y _ ys) | x == y    = True
 -- |
 -- >>> fromList [(11,1), (5,3), (5,0), (9,-1), (7,3), (8,-3)]
 -- 11|1 : 5|3 : 5|0 : 9|-1 : 7|3 : 8|-3 : []
+-- >>> fromList [('x',1), ('y',2)]
+-- 'x'|1 : 'y'|2 : []
 fromList :: [(a, Int)] -> PriorityQueue a
 fromList []            = EmptyQueue
 fromList ((x, y) : xs) = Push x y (fromList xs)
