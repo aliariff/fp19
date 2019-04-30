@@ -68,3 +68,10 @@ value x (Push m n xs) | x == n    = m
 -- (1,[])
 pop :: PriorityQueue a -> (a, PriorityQueue a)
 pop pq = (value maxP pq, remove maxP pq) where maxP = maxPriority pq
+
+-- |
+-- >>> toList p
+-- [5,7,11,5,9,8]
+toList :: PriorityQueue a -> [a]
+toList EmptyQueue = []
+toList pq         = x : toList xs where (x, xs) = pop pq
