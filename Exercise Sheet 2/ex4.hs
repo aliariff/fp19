@@ -12,6 +12,10 @@ foldPoly :: (a -> Int -> b -> b) -> b -> Polynomial a -> b
 foldPoly _ e Null           = e
 foldPoly f e (Coeff x y xs) = f x y (foldPoly f e xs)
 
+maxi :: a -> Int -> Int -> Int
+maxi _ x y | x > y     = x
+           | otherwise = y
+
 -- |
 -- >>> degree q
 -- 3
@@ -20,7 +24,3 @@ foldPoly f e (Coeff x y xs) = f x y (foldPoly f e xs)
 degree :: Polynomial Int -> Int
 degree Null = minBound :: Int
 degree xs   = foldPoly maxi 0 xs
-
-maxi :: a -> Int -> Int -> Int
-maxi _ x y | x > y     = x
-           | otherwise = y
