@@ -7,9 +7,10 @@ unique x y | filter (== x) y == [] = x : y
 -- |
 -- >>> removeDuplicates [1,1,2,1,-1,1,1,2,3,1]
 -- [-1,2,3,1]
+-- >>> removeDuplicates []
+-- []
 removeDuplicates :: Eq a => [a] -> [a]
-removeDuplicates [] = []
-removeDuplicates xs = foldr unique [] xs
+removeDuplicates = foldr unique []
 
 len :: [a] -> Int
 len = foldr (\_ n -> 1 + n) 0
