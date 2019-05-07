@@ -31,11 +31,13 @@ instance Mono Integer where
 -- |
 -- >>> binOp (Cons 'a' Nil) (Cons 'b' (Cons 'c' Nil))
 -- Cons 'a' (Cons 'b' (Cons 'c' Nil))
+-- >>> binOp (Cons 1 Nil) (Cons 2 (Cons 3 Nil))
+-- Cons 1 (Cons 2 (Cons 3 Nil))
 instance Eq a => Mono(List a) where
   one = Nil
-  binOp x           Nil         = x
-  binOp Nil         y           = y
-  binOp (Cons x xs) (Cons y ys) = Cons x (binOp xs (Cons y ys))
+  binOp x           Nil = x
+  binOp Nil         y   = y
+  binOp (Cons x xs) y   = Cons x (binOp xs y)
 
 -- |
 -- >>> multiply [(3,Cons 'a' Nil),(1,Cons 'b' Nil),(2,Cons 'c' (Cons 'd' Nil))]
