@@ -37,3 +37,13 @@ goldbach n =
   , x <= y
   , x + y == n
   ]
+
+-- |
+-- >>> range [3,4,5] 1 2
+-- [4,5]
+-- >>> range [3,4,5] (-7) 2
+-- [3,4,5]
+-- >>> range [3,4,5] 10 7
+-- []
+range :: [a] -> Int -> Int -> [a]
+range xs m n = [ x | (i, x) <- zip [0 ..] xs, i >= m, i <= n ]
