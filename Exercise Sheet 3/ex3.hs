@@ -85,7 +85,7 @@ library books = do
       then filter (\(_, a) -> a == query) books
       else filter (\(t, _) -> t == query) books
 
-    bookInstances = foldr (\(t, a) xs -> xs ++ [Book (t, a)]) [] filteredBooks
+    bookInstances = map (\(t, a) -> Book (t, a)) filteredBooks
 
     joinedBooks =
       foldr ((\str xs -> xs ++ str ++ "\n") . show) "" bookInstances
