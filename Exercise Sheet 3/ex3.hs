@@ -103,3 +103,8 @@ getInput = do
   input <- getLine
   return (parseLibraryInput input)
   -- end replace
+
+-- 3d
+-- No it is not possible because of the return method of main' is only Int, when the whole process of main is doing input output process.
+-- In order to make it work we can declare the function as main' :: IO Int and then change the implementation of library function to return the number of the books when get Exit parameter. and also change the library return type to library :: [(String, String)] -> IO Int
+-- something like this: process Exit = return (length books)
