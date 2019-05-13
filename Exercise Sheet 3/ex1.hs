@@ -2,11 +2,11 @@ module S3Ex1 where
 
 nextCollatz :: Int -> Int
 nextCollatz n | n `mod` 2 == 0 = n `div` 2
-              | n `mod` 2 == 1 = 3 * n + 1
+              | otherwise      = 3 * n + 1
 
 -- |
 -- >>> collatz 1
--- [1,4,2,1]
+-- [1]
 -- >>> collatz 2
 -- [2,1]
 -- >>> collatz 3
@@ -20,13 +20,14 @@ nextCollatz n | n `mod` 2 == 0 = n `div` 2
 -- >>> collatz (-1)
 -- []
 collatz :: Int -> [Int]
-collatz n
-  | n > 0 = [n] ++ takeWhile (/= 1) (iterate nextCollatz (nextCollatz n)) ++ [1]
-  | otherwise = []
+collatz n | n > 0     = takeWhile (/= 1) (iterate nextCollatz n) ++ [1]
+          | otherwise = []
 
 -- |
 -- >>> total_stopping_time 1
--- 3
+-- 0
+-- >>> total_stopping_time 2
+-- 1
 -- >>> total_stopping_time 3
 -- 7
 -- >>> total_stopping_time 0
@@ -38,7 +39,7 @@ total_stopping_time n = length (collatz n) - 1
 
 -- |
 -- >>> check_collatz 1
--- False
+-- True
 -- >>> check_collatz 2
 -- True
 -- >>> check_collatz 3
