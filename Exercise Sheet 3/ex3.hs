@@ -32,7 +32,6 @@ main = do
   putStrLn "Welcome to your Library"
   library []
   putStrLn "Bye!"
-  return ()
   -- end replace
 
 library :: [(String, String)] -> IO ()
