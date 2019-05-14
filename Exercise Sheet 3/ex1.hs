@@ -4,24 +4,8 @@ nextCollatz :: Int -> Int
 nextCollatz n | n `mod` 2 == 0 = n `div` 2
               | otherwise      = 3 * n + 1
 
--- |
--- >>> collatz 1
--- [1]
--- >>> collatz 2
--- [2,1]
--- >>> collatz 3
--- [3,10,5,16,8,4,2,1]
--- >>> collatz 4
--- [4,2,1]
--- >>> collatz 5
--- [5,16,8,4,2,1]
--- >>> collatz 0
--- []
--- >>> collatz (-1)
--- []
 collatz :: Int -> [Int]
-collatz n | n > 0     = takeWhile (/= 1) (iterate nextCollatz n) ++ [1]
-          | otherwise = []
+collatz n = n : collatz (nextCollatz n)
 
 -- |
 -- >>> total_stopping_time 1
@@ -31,11 +15,11 @@ collatz n | n > 0     = takeWhile (/= 1) (iterate nextCollatz n) ++ [1]
 -- >>> total_stopping_time 3
 -- 7
 -- >>> total_stopping_time 0
--- -1
+-- 0
 -- >>> total_stopping_time (-1)
--- -1
+-- 0
 total_stopping_time :: Int -> Int
-total_stopping_time n = length (collatz n) - 1
+total_stopping_time n = length (takeWhile (> 1) (collatz n))
 
 -- |
 -- >>> check_collatz 1
