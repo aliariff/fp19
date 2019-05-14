@@ -44,38 +44,34 @@ library books = do
   case input of
     Exit    -> return ()
     Error q -> do
-      putStrLn ("There has been an error:" ++ q)
+      putStrLn ("There has been an error: " ++ q)
       library books
     Book b -> do
       putStrLn
         "Do you want to (p)ut the book back or do you want to (t)ake the book?"
       choice <- getLine
-      if elem (map toLower choice) ["p", "t"]
-        then do
-          case choice of
-            "p" -> do
-              putStrLn "Done!"
-              library (b : books)
-            "t" -> do
-              if elem b books
-                then do
-                  putStrLn "Done!"
-                  library ([ x | x <- books, x /= b ])
-                else do
-                  putStrLn "You do not have this book!"
-                  library books
-        else do
+      case map toLower choice of
+        "p" -> do
+          putStrLn "Done!"
+          library (b : books)
+        "t" -> if b `elem` books
+          then do
+            putStrLn "Done!"
+            library [ x | x <- books, x /= b ]
+          else do
+            putStrLn "You do not have this book!"
+            library books
+        _ -> do
           putStrLn "Wrong input!"
           library books
 
-
     Author a -> do
       putStrLn ("You have the following books from " ++ a)
-      print ([ fst x | x <- books, snd (x) == a ])
+      print [ fst x | x <- books, snd x == a ]
       library books
     Title t -> do
       putStrLn ("You have the following books with the title: " ++ t)
-      print ([ fst x | x <- books, fst (x) == t ])
+      print [ fst x | x <- books, fst x == t ]
       library books
 
 
