@@ -67,11 +67,11 @@ library books = do
 
     Author a -> do
       putStrLn ("You have the following books from " ++ a)
-      print [ fst x | x <- books, snd x == a ]
+      mapM_ print [ Book x | x <- books, snd x == a ]
       library books
     Title t -> do
       putStrLn ("You have the following books with the title: " ++ t)
-      print [ fst x | x <- books, fst x == t ]
+      mapM_ print [ Book x | x <- books, fst x == t ]
       library books
 
 
