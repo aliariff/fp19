@@ -1,7 +1,8 @@
 module S3Ex1 where
 
 nextCollatz :: Int -> Int
-nextCollatz n | n `mod` 2 == 0 = n `div` 2
+nextCollatz n | n < 1          = error "Cannot have negative number"
+              | n `mod` 2 == 0 = n `div` 2
               | otherwise      = 3 * n + 1
 
 collatz :: Int -> [Int]
@@ -27,7 +28,7 @@ total_stopping_time n = length (takeWhile (> 1) (collatz n))
 -- >>> check_collatz 2
 -- True
 -- >>> check_collatz 3
--- False
+-- True
 -- >>> check_collatz 4
 -- True
 -- >>> check_collatz 5
@@ -37,5 +38,7 @@ total_stopping_time n = length (takeWhile (> 1) (collatz n))
 -- >>> check_collatz (-1)
 -- False
 check_collatz :: Int -> Bool
-check_collatz n | n > 0     = total_stopping_time n <= n
-                | otherwise = False
+check_collatz n | n == 1                      = True
+                | n < 1                       = False
+                | (total_stopping_time n) > 0 = check_collatz (n - 1)
+                | otherwise                   = False
